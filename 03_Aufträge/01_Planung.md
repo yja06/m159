@@ -51,7 +51,7 @@ Alle weiteren Ports sind nur innerhalb des VPCs offen.
 
 | Komponente                      | VPC-ID                | CIDR         | Name                              |
 | ------------------------------- | --------------------- | ----------- | --------------------------------- |
-| VPC                             | vpc-0470f613e45697700 | 10.0.0.0/16  | M159-vpc-yenul                    |
+| VPC                             |                       | 10.0.0.0/16  | M159-vpc-yenul                    |
 | M159-subnet-private1-us-east-1a |                       | 10.0.128.0/20 | M159-private1-yenul-us-east-1a    |
 | M159-subnet-private2-us-east-1b |                       | 10.0.144.0/20 | M159-private2-yenul-us-east-1b    |
 | M159-subnet-public1-us-east-1a  |                       | 10.0.0.0/20   | M159-public1-yenul-us-east-1a     |
