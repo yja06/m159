@@ -26,7 +26,7 @@ Lokale AD Domain (zu Beginn), spaeter oeffentliche Domain als UPN
 | Vorname                             | Yenul                                          |
 | Nachname                            | Jayawardhana                                   |
 | Klasse                              | M159                                           |
-| Dokumentation (GIT-Repository-Link) | https://github.com/yenul/m159-ad-projekt       |
+| Dokumentation (GIT-Repository-Link) | https://github.com/yja06/m159                  |
 
 ---
 
@@ -35,7 +35,7 @@ Lokale AD Domain (zu Beginn), spaeter oeffentliche Domain als UPN
 | Feld                                                         | Wert                         |
 | ------------------------------------------------------------ | ---------------------------- |
 | Active Directory Second-Level-Domäne                        | yenul.m159                    |
-| Geplante öffentliche Domain (UPN) -> dynv6                  | yenul159.v6.rocks             |
+| Geplante öffentliche Domain (UPN) -> dynv6                  | yenul159.dynv6.net             |
 | Azure Education Account mit 80$                              | jayawardhanayenul@gmail.com  |
 | Azure Education Account Passwort                             | privat                       |
 
