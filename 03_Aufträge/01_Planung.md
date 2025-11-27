@@ -1,4 +1,4 @@
-# M159 - Projekt-Setup-Sheet (KORRIGIERT)
+# M159 - Projekt-Setup-Sheet 
 
 In diesem Dokument werden sämtliche Angaben sowie Passwörter, welche Sie für die Installation Ihrer Umgebung benötigen, festgehalten.
 
