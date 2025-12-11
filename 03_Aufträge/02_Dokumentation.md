@@ -100,7 +100,7 @@ netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
 
 * **Screenshot:**
 
-![DC-Server mit Script konfigurieren](screenshots/DC-Server_mit_Script_konfigurieren.png)
+![DC-Server mit Script konfigurieren](DC-Server_mit_Script_konfigurieren.png)
 
 ### 2.5 DNS-Zonen überprüfen
 
@@ -110,9 +110,9 @@ netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
 
 * **Screenshots:**
 
-![nslookup srv nach dc erstellung](screenshots/nslookup_srv_nach_dc_erstellung.png)
+![nslookup srv nach dc erstellung](nslookup_srv_nach_dc_erstellung.png)
 
-![nslookup auf reverse lookup zone](screenshots/nslookup_auf_reverse_lookup_zone.png)
+![nslookup auf reverse lookup zone](nslookup_auf_reverse_lookup_zone.png)
 
 
 ---
@@ -137,13 +137,17 @@ ipconfig /flushdns
 
 * **Screenshot:**
 
-![dns server auf client vm auf dc zuweisen](screenshots/dns_server_auf_client_vm_auf_dc_zuweisen.png)
+![dns server auf client vm auf dc zuweisen](dns_server_auf_client_vm_auf_dc_zuweisen.png)
 
 ### 3.2 DNS-Konfiguration testen
 
 ```cmd
 # DNS-Auflösung testen
 nslookup ec2.yenul.m159
+
+* **Screenshot:**
+
+![nslookup auf client vm](nslookup_auf_client_vm.png)
 
 # Ping zum DC
 ping ec2.yenul.m159
@@ -171,6 +175,12 @@ Add-Computer -DomainName "ec2.yenul.m159" -Credential (Get-Credential) -Restart
    * Benutzername: `Administrator` oder `ec2\Administrator`
    * Passwort: [DC Admin-Passwort]
 8. Willkommensnachricht erscheint 9. Neustart durchführen
+
+* **Screenshots:**
+
+![Domain Join](Domain_Join.png)
+
+![Domain join success](Domain_join_success.png)
 
 ### 3.4 Mit Domain-Admin anmelden
 
