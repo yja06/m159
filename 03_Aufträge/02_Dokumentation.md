@@ -98,11 +98,21 @@ netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
 * NetBIOS-Name: `EC2`
 * Installation abschließen und Neustart
 
+* **Screenshot:**
+
+![DC-Server mit Script konfigurieren](screenshots/DC-Server_mit_Script_konfigurieren.png)
+
 ### 2.5 DNS-Zonen überprüfen
 
 * DNS Manager öffnen
 * Forward Lookup Zones prüfen
 * Reverse Lookup Zones prüfen
+
+* **Screenshots:**
+
+![nslookup srv nach dc erstellung](screenshots/nslookup_srv_nach_dc_erstellung.png)
+
+![nslookup auf reverse lookup zone](screenshots/nslookup_auf_reverse_lookup_zone.png)
 
 
 ---
@@ -124,6 +134,10 @@ netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
 netsh interface ipv4 set dnsservers "Ethernet 3" static 10.0.1.10 primary
 ipconfig /flushdns
 ``````
+
+* **Screenshot:**
+
+![dns server auf client vm auf dc zuweisen](screenshots/dns_server_auf_client_vm_auf_dc_zuweisen.png)
 
 ### 3.2 DNS-Konfiguration testen
 
