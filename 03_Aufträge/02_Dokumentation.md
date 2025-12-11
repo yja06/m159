@@ -69,6 +69,40 @@
 
 ### 2.1 Ping auf DC erlauben
 * PowerShell als Administrator:  
+```powershell
+New-NetFirewallRule -DisplayName "Allow ICMPv4-In" -Protocol ICMPv4
+```
+
+### 2.2 DNS-Server konfigurieren
+
+* DNS-Server auf DC-IP setzen:
+
+```cmd
+netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
+```
+
+### 2.3 Active Directory Domain Services installieren
+
+* Server Manager öffnen
+* Add Roles and Features
+* Active Directory Domain Services auswählen
+* Installation durchführen
+
+### 2.4 Domain Controller promovieren
+
+* Nach ADDS-Installation: "Promote this server to a domain controller"
+* Add a new forest
+* Root domain name: `ec2.yenul.m159`
+* DSRM-Passwort festlegen
+* DNS-Server wird automatisch installiert
+* NetBIOS-Name: `EC2`
+* Installation abschließen und Neustart
+
+### 2.5 DNS-Zonen überprüfen
+
+* DNS Manager öffnen
+* Forward Lookup Zones prüfen
+* Reverse Lookup Zones prüfen
 
 
 ---
@@ -86,16 +120,10 @@
 **Lösung:**
 * DNS-Server auf dem Client korrigieren:
 
-```powershell
-# DNS auf die richtige DC-IP setzen
-Set-DnsClientServerAddress -InterfaceAlias "Ethernet 3" -ServerAddresses "10.0.1.10"
-
-# Überprüfen
-Get-DnsClientServerAddress -InterfaceAlias "Ethernet 3"
-
-# DNS Cache leeren
+```cmd
+netsh interface ipv4 set dnsservers "Ethernet 3" static 10.0.1.10 primary
 ipconfig /flushdns
-```
+``````
 
 ### 3.2 DNS-Konfiguration testen
 
@@ -128,8 +156,7 @@ Add-Computer -DomainName "ec2.yenul.m159" -Credential (Get-Credential) -Restart
 7. Domain-Admin Credentials eingeben:
    * Benutzername: `Administrator` oder `ec2\Administrator`
    * Passwort: [DC Admin-Passwort]
-8. Willkommensnachricht erscheint ✅
-9. Neustart durchführen
+8. Willkommensnachricht erscheint 9. Neustart durchführen
 
 ### 3.4 Mit Domain-Admin anmelden
 
@@ -147,44 +174,16 @@ echo %USERDOMAIN%
 # Sollte anzeigen: EC2
 ```
 
-```powershell
-# Domänenmitgliedschaft prüfen
-Get-ComputerInfo | Select-Object CsDomain, CsDomainRole
-
-# Gruppenrichtlinien aktualisieren
-gpupdate /force
-```
 
 ### 3.5 DNS-Dienst auf DC konfigurieren
 
 **Problem:** DC zeigte "localhost" bei nslookup statt eigenen DNS-Server
 
 **Lösung auf dem DC:**
-```powershell
-# DNS auf sich selbst setzen
-Set-DnsClientServerAddress -InterfaceAlias "Ethernet 3" -ServerAddresses "10.0.1.10","127.0.0.1"
-
-# DNS-Cache leeren und neu registrieren
-ipconfig /flushdns
-ipconfig /registerdns
-
-# DNS-Dienst neu starten
-Restart-Service DNS
-
-# Testen
-nslookup YJA-Client
-nslookup ec2.yenul.m159
-```
-
-**DNS-Zonen prüfen:**
-```powershell
-# Forward Lookup Zone prüfen
-Get-DnsServerZone
-
-# A-Records anzeigen
-Get-DnsServerResourceRecord -ZoneName "ec2.yenul.m159" -RRType A
-```
+```cmd
+REM DNS-Zonen mit DNS Manager GUI prüfen
+``````
 
 ---
 
-**Status:** ✅ Client erfolgreich zur Domain `ec2.yenul.m159` gejoint
+**StatusClient erfolgreich zur Domain `ec2.yenul.m159` gejoint
