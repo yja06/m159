@@ -69,18 +69,12 @@
 
 ### 2.1 Ping auf DC erlauben
 * PowerShell als Administrator:  
-```powershell
-New-NetFirewallRule -DisplayName "Allow ICMPv4-In" -Protocol ICMPv4
-```
+
 <img width="2810" height="1198" alt="ping erlauben dc" src="https://github.com/user-attachments/assets/076c3760-7c7c-47c9-a975-99d6bf183970" />
 
 ### 2.2 DNS-Server konfigurieren
 
 * DNS-Server auf DC-IP setzen:
-
-```cmd
-netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
-```
 
 ### 2.3 Active Directory Domain Services installieren
 
@@ -134,6 +128,7 @@ Zu controller promoten
 
 ## 3. Client zur Domain joinen
 
+
 ### 3.1 Netzwerkkonfiguration prüfen
 
 **Problem identifiziert:**
@@ -160,8 +155,7 @@ Zu controller promoten
 
 
 * Benutzername: `ec2\Administrator`
-* Passwort eingeben
-* System startet automatisch neu
+* Passwort: Tbz12344$
 
 * **Screenshots:**
 
@@ -173,7 +167,8 @@ Zu controller promoten
 
 Nach dem Neustart:
 * Bei der Anmeldung: "Anderer Benutzer"
-* Benutzername: `ec2\Administrator` 
+* Benutzername: `ec2\Administrator`
+* Passwort: Tbz12344$
 
 ### 3.5 DNS-Dienst auf DC konfigurieren
 
