@@ -72,6 +72,7 @@
 ```powershell
 New-NetFirewallRule -DisplayName "Allow ICMPv4-In" -Protocol ICMPv4
 ```
+<img width="2810" height="1198" alt="ping erlauben dc" src="https://github.com/user-attachments/assets/076c3760-7c7c-47c9-a975-99d6bf183970" />
 
 ### 2.2 DNS-Server konfigurieren
 
@@ -87,6 +88,8 @@ netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
 * Add Roles and Features
 * Active Directory Domain Services auswählen
 * Installation durchführen
+* 
+<img width="3618" height="1964" alt="AD heruntergeldaen auf server" src="https://github.com/user-attachments/assets/f074ebac-5af3-4b4d-8d27-09ffa45d4047" />
 
 ### 2.4 Domain Controller promovieren
 
@@ -100,7 +103,16 @@ netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
 
 * **Screenshot:**
 
-![DC-Server mit Script konfigurieren](DC-Server_mit_Script_konfigurieren.png)
+<img width="3612" height="1988" alt="DC Server mit Script konfigurieren" src="https://github.com/user-attachments/assets/472bb2a9-750b-46f2-9f42-d5e93e74bf9b" />
+
+Zu controller promoten
+
+<img width="3640" height="1960" alt="promote server to dc" src="https://github.com/user-attachments/assets/737c31d2-8d3b-4aba-8cc0-098a7929ffee" />
+
+### Instanz Backupen zur Sicherheit
+
+<img width="3370" height="1570" alt="Backup DC Instanz" src="https://github.com/user-attachments/assets/c1622dfd-f533-4a07-ae95-dcc10b59ec64" />
+
 
 ### 2.5 DNS-Zonen überprüfen
 
@@ -110,9 +122,12 @@ netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
 
 * **Screenshots:**
 
-![nslookup srv nach dc erstellung](nslookup_srv_nach_dc_erstellung.png)
+<img width="2126" height="1260" alt="nslookup nach dc erstellung" src="https://github.com/user-attachments/assets/8a1afa86-1c4f-4511-8dae-fab97a99d4bb" />
 
-![nslookup auf reverse lookup zone](nslookup_auf_reverse_lookup_zone.png)
+
+<img width="3628" height="1970" alt="nslookup srv nach dc erstellung" src="https://github.com/user-attachments/assets/82223787-85f9-4b11-b6b3-b4dcfbe4890c" />
+
+<img width="1528" height="1030" alt="neue dns reverse lookup zone" src="https://github.com/user-attachments/assets/7e4a1e0a-ce27-41f7-96d6-15b20bbfd0d3" />
 
 
 ---
@@ -130,84 +145,39 @@ netsh interface ipv4 set dnsservers "Ethernet" static 10.0.1.10 primary
 **Lösung:**
 * DNS-Server auf dem Client korrigieren:
 
-```cmd
-netsh interface ipv4 set dnsservers "Ethernet 3" static 10.0.1.10 primary
-ipconfig /flushdns
-``````
 
 * **Screenshot:**
 
-![dns server auf client vm auf dc zuweisen](dns_server_auf_client_vm_auf_dc_zuweisen.png)
+<img width="2610" height="1674" alt="dns server auf client vm auf dc zuweisen" src="https://github.com/user-attachments/assets/39e1d69d-6568-4d29-af48-6fe87d41cd0e" />
+
 
 ### 3.2 DNS-Konfiguration testen
 
-```cmd
-# DNS-Auflösung testen
-nslookup ec2.yenul.m159
+<img width="2602" height="1688" alt="nslookup auf client vm" src="https://github.com/user-attachments/assets/e12ee480-0785-4ce9-9160-0e4c817887b4" />
 
-* **Screenshot:**
-
-![nslookup auf client vm](nslookup_auf_client_vm.png)
-
-# Ping zum DC
-ping ec2.yenul.m159
-ping 10.0.1.10
-```
 
 ### 3.3 Client zur Domain joinen
 
-**PowerShell-Methode:**
-```powershell
-Add-Computer -DomainName "ec2.yenul.m159" -Credential (Get-Credential) -Restart
-```
+
 * Benutzername: `ec2\Administrator`
 * Passwort eingeben
 * System startet automatisch neu
 
-**GUI-Methode:**
-1. Windows-Taste + Pause → Systemeinstellungen
-2. "Einstellungen ändern" (bei Computername)
-3. Button "Ändern..."
-4. Wähle: "Domäne:"
-5. Eingabe: `ec2.yenul.m159`
-6. OK klicken
-7. Domain-Admin Credentials eingeben:
-   * Benutzername: `Administrator` oder `ec2\Administrator`
-   * Passwort: [DC Admin-Passwort]
-8. Willkommensnachricht erscheint 9. Neustart durchführen
-
 * **Screenshots:**
 
-![Domain Join](Domain_Join.png)
+<img width="2600" height="1702" alt="Domain Join" src="https://github.com/user-attachments/assets/5f1b5035-dcc1-4000-a62b-4414f388b683" />
 
-![Domain join success](Domain_join_success.png)
+<img width="2550" height="1666" alt="Domain join success" src="https://github.com/user-attachments/assets/6cff6cce-2fa5-4d83-b323-aafe6209436f" />
 
 ### 3.4 Mit Domain-Admin anmelden
 
 Nach dem Neustart:
 * Bei der Anmeldung: "Anderer Benutzer"
-* Benutzername: `ec2\Administrator` oder `Administrator@ec2.yenul.m159`
-* Passwort eingeben
-
-**Überprüfung:**
-```cmd
-whoami
-# Sollte anzeigen: ec2\administrator
-
-echo %USERDOMAIN%
-# Sollte anzeigen: EC2
-```
-
+* Benutzername: `ec2\Administrator` 
 
 ### 3.5 DNS-Dienst auf DC konfigurieren
 
 **Problem:** DC zeigte "localhost" bei nslookup statt eigenen DNS-Server
 
-**Lösung auf dem DC:**
-```cmd
-REM DNS-Zonen mit DNS Manager GUI prüfen
-``````
+<img width="2146" height="1658" alt="nslookup auf dc zu client" src="https://github.com/user-attachments/assets/b50228bb-2256-422f-a4a3-ed3702afecee" />
 
----
-
-**StatusClient erfolgreich zur Domain `ec2.yenul.m159` gejoint
