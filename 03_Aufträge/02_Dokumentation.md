@@ -418,3 +418,142 @@ Jeder Benutzer wurde seiner entsprechenden Abteilungsgruppe hinzugefügt:
 
 
 ---
+
+### Phase 2: Ordnerstruktur und Freigaben erstellen
+
+#### 1. Hauptordner für Freigaben erstellt
+
+Auf dem Domain Controller wurde der zentrale Freigabe-Ordner erstellt:
+- Pfad: `C:\Shares`
+
+<img width="3292" height="1850" alt="Schares folder erstellen" src="https://github.com/user-attachments/assets/3db52ae3-ebac-4bce-9161-24feb872dffc" />
+
+
+---
+
+#### 2. Ordnerstruktur erstellt
+
+Folgende Struktur wurde unter `C:\Shares` angelegt:
+
+C:\Shares
+├── Daten
+│ ├── Buchhaltung
+│ ├── GL
+│ ├── Sekretariat
+│ └── Pool
+└── Aussendienst
+
+
+<img width="2206" height="1342" alt="Shares unterordner" src="https://github.com/user-attachments/assets/2fe1d90d-9cd3-46c1-8df7-6507e556d250" />
+
+<img width="2260" height="1260" alt="Shares unterordner 2" src="https://github.com/user-attachments/assets/3c72d7f7-9984-4413-9651-7a8a7bdcd7b2" />
+
+<img width="1626" height="1078" alt="Daten Ordner sharen" src="https://github.com/user-attachments/assets/b06cddd7-872c-4afe-b43b-af13cd6d2e99" />
+
+---
+
+#### 3. Freigaben erstellt
+
+**Freigabe "Daten":**
+- Freigabename: `Daten`
+- UNC-Pfad: `\\dc1\Daten`
+- Freigabeberechtigung: Everyone = Change
+
+<img width="928" height="1172" alt="Permission Daten" src="https://github.com/user-attachments/assets/162e9ce7-b361-476f-9095-a6822832b04c" />
+
+
+**Freigabe "Aussendienst":**
+- Freigabename: `Aussendienst`
+- UNC-Pfad: `\\dc1\Aussendienst`
+- Freigabeberechtigung: Everyone = Change
+
+<img width="1580" height="1128" alt="Aussendienst sharing" src="https://github.com/user-attachments/assets/605b31c1-fe91-4c69-bc5a-4f70a6ba0405" />
+
+<img width="1016" height="1202" alt="Permission Aussendienst" src="https://github.com/user-attachments/assets/f570dcc0-f0fc-42b2-8989-df0ed1d56de2" />
+
+
+---
+
+#### 4. Vererbung deaktiviert
+
+Für den Ordner `Daten` und alle Unterordner wurde die Vererbung deaktiviert:
+- Methode: "Convert inherited permissions into explicit permissions"
+- Betroffen: Daten, Buchhaltung, GL, Sekretariat, Pool
+
+**Vorgehensweise:**
+1. Ordner → Properties → Security → Advanced
+2. "Disable inheritance" → Convert
+
+<img width="1698" height="1134" alt="Veerbung deaktivieren" src="https://github.com/user-attachments/assets/51f80d07-72c4-47e2-ab2b-d630d4f58ca0" />
+
+
+---
+
+#### 5. Domänenbenutzer-Gruppe entfernt
+
+Die Standardgruppe "Domain Users" wurde von allen Ordnern entfernt, um eine saubere Berechtigungsstruktur zu gewährleisten.
+
+<img width="1194" height="1244" alt="Domäne User remove" src="https://github.com/user-attachments/assets/38508d74-7ce9-423c-840b-369538cce36d" />
+
+---
+
+#### 6. NTFS-Berechtigungen gesetzt
+
+**Ordner: `C:\Shares\Daten`**
+- Gruppe: `EC2\intern`
+- Berechtigung: **Read** (Lesen)
+
+<img width="802" height="876" alt="intern gruppe daten premission" src="https://github.com/user-attachments/assets/f9a6f672-94dc-4a2a-8889-53e9b63cfb3a" />
+
+
+**Ordner: `C:\Shares\Daten\Buchhaltung`**
+- Gruppe: `EC2\Buchhaltung`
+- Berechtigung: **Modify** (Ändern)
+
+<img width="1300" height="1152" alt="buchhaltung premissions" src="https://github.com/user-attachments/assets/2392e429-f60b-47e3-bffa-fef6a8b14130" />
+
+
+**Ordner: `C:\Shares\Daten\GL`**
+- Gruppe: `EC2\GL`
+- Berechtigung: **Modify** (Ändern)
+
+
+<img width="1080" height="1142" alt="gl premissions" src="https://github.com/user-attachments/assets/f4c2b2f9-e3e6-439e-8586-3da405a556bd" />
+
+
+**Ordner: `C:\Shares\Daten\Sekretariat`**
+- Gruppe: `EC2\Sekretariat`
+- Berechtigung: **Modify** (Ändern)
+
+
+<img width="1186" height="1264" alt="sekretariat premissions" src="https://github.com/user-attachments/assets/5174f3c8-337c-4546-a2e7-d4308154aac0" />
+
+
+**Ordner: `C:\Shares\Daten\Pool`**
+- Gruppe: `EC2\intern`
+- Berechtigung: **Modify** (Ändern)
+
+<img width="1016" height="1144" alt="pool premissions" src="https://github.com/user-attachments/assets/ca198404-7ac8-4592-b261-f4f4cee80132" />
+
+
+**Ordner: `C:\Shares\Aussendienst`**
+- Gruppe: `EC2\extern`
+- Berechtigung: **Read** (Lesen)
+
+<img width="1732" height="1322" alt="extern premissions" src="https://github.com/user-attachments/assets/0f460e5b-e253-4313-9a4a-d68691366ee7" />
+
+
+---
+
+### Berechtigungsmatrix Übersicht
+
+| Ordner | Gruppe | NTFS-Berechtigung | Freigabe-Berechtigung |
+|--------|--------|-------------------|----------------------|
+| Daten | intern | Read | Everyone: Change |
+| Daten\Buchhaltung | Buchhaltung | Modify | - |
+| Daten\GL | GL | Modify | - |
+| Daten\Sekretariat | Sekretariat | Modify | - |
+| Daten\Pool | intern | Modify | - |
+| Aussendienst | extern | Read | Everyone: Change |
+
+---
