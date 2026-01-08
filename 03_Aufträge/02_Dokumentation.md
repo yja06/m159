@@ -1,4 +1,4 @@
-<img width="3110" height="1830" alt="promoter gruppe erstellen" src="https://github.com/user-attachments/assets/34fb383b-3f15-4d65-9989-90ffd6b978f1" /><img width="3644" height="1964" alt="User für Rdp verbindung erstellen" src="https://github.com/user-attachments/assets/cac09e4e-a8c0-4ec2-b3c1-3f808a49a833" /># Initial Setup – AWS Infrastruktur & Windows Basis-Konfiguration
+# Initial Setup – AWS Infrastruktur & Windows Basis-Konfiguration
 
 ## 1. AWS Infrastruktur erstellen
 
