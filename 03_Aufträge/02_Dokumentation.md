@@ -1,4 +1,4 @@
-# Initial Setup – AWS Infrastruktur & Windows Basis-Konfiguration
+<img width="3644" height="1964" alt="User für Rdp verbindung erstellen" src="https://github.com/user-attachments/assets/cac09e4e-a8c0-4ec2-b3c1-3f808a49a833" /># Initial Setup – AWS Infrastruktur & Windows Basis-Konfiguration
 
 ## 1. AWS Infrastruktur erstellen
 
@@ -176,3 +176,140 @@ Nach dem Neustart:
 
 <img width="2146" height="1658" alt="nslookup auf dc zu client" src="https://github.com/user-attachments/assets/b50228bb-2256-422f-a4a3-ed3702afecee" />
 
+### 3.6 Remote Desktop Konzept - RDP-Zugriff für Benutzer
+
+---
+
+## Umsetzung
+
+### 1. AD-Gruppen erstellen
+
+**Auf dem Domain Controller:**
+
+1. **Active Directory Users and Computers** öffnen
+   - Start → "Active Directory Users and Computers" eingeben
+
+
+2. **Erste Gruppe erstellen (RDP-Admins)**
+   - Rechtsklick auf Container **Users** → **New** → **Group**
+   - Group name: `RDP-Admins`
+   - Group scope: `Global`
+   - Group type: `Security`
+   - **OK** klicken
+
+
+
+3. **Zweite Gruppe erstellen (RDP-Users)**
+   - Rechtsklick auf Container **Users** → **New** → **Group**
+   - Group name: `RDP-Users`
+   - Group scope: `Global`
+   - Group type: `Security`
+   - **OK** klicken
+<img width="3644" height="1964" alt="User für Rdp verbindung erstellen" src="https://github.com/user-attachments/assets/7048137c-0607-427a-87bd-7748ca6c3cb3" />
+<img width="2818" height="2114" alt="user gruppe" src="https://github.com/user-attachments/assets/c45897c4-7341-4b66-92d5-cf6457f131e3" />
+
+
+---
+
+### 2. Testbenutzer erstellen
+
+1. **Neuen Benutzer anlegen**
+   - Rechtsklick auf **Users** → **New** → **User**
+   - First name: `Test`
+   - Last name: `User`
+   - User logon name: `testuser`
+   - **Next** klicken
+
+<img width="2134" height="1738" alt="test rdp user" src="https://github.com/user-attachments/assets/14a1847c-f125-40b8-969e-e964d1efd931" />
+
+
+2. **Passwort setzen**
+   - Password: `Tbz12344`
+   - Confirm password: `Tbz12344`
+ 
+
+---
+
+### 3. Benutzer zu Gruppen hinzufügen
+
+1. **Administrator zur RDP-Admins Gruppe hinzufügen**
+   - Doppelklick auf Gruppe **RDP-Admins**
+   - Tab **Members** → **Add...**
+   - `Administrator` eingeben
+   - **Check Names** → **OK** → **OK**
+
+<img width="1762" height="1318" alt="Admin zu Rdp Admin hinzufügen" src="https://github.com/user-attachments/assets/8b80cef3-8146-472d-ac20-51a7bd505742" />
+
+
+2. **TestUser zur RDP-Users Gruppe hinzufügen**
+   - Doppelklick auf Gruppe **RDP-Users**
+   - Tab **Members** → **Add...**
+   - `testuser` eingeben
+   - **Check Names** → **OK** → **OK**
+
+
+
+---
+
+### 4. RDP-Berechtigungen auf dem DC zuweisen
+
+1. **Local Security Policy öffnen**
+   - Win+R → `sysdm.cpl` → Enter
+<img width="2100" height="1394" alt="add user to sysdm cpl" src="https://github.com/user-attachments/assets/c16ffb92-918f-4433-9231-e6e3135b15fd" />
+<img width="1728" height="1224" alt="user added to sysdm cpl" src="https://github.com/user-attachments/assets/262cd3ed-71ef-485f-bf0a-1722d229c648" />
+<img width="2026" height="1676" alt="add user to sysdm cpl p 2" src="https://github.com/user-attachments/assets/8689890c-0ca7-437a-a7ad-22f2ac3d9a41" />
+
+ 
+
+### 4. RDP-Berechtigungen auf dem DC zuweisen
+
+1. **Local Security Policy öffnen**
+   - Win+R → `secpol.msc` → Enter
+
+2. **User Rights Assignment öffnen**
+   - **Local Policies** erweitern → **User Rights Assignment** klicken
+
+<img width="2070" height="1448" alt="rpd users berechtigung geben fürs verbinden" src="https://github.com/user-attachments/assets/d2a19e5f-9452-4b5c-9b55-cb2fb1354bb1" />
+
+
+3. **RDP-Rechte zuweisen**
+   - Doppelklick auf **"Allow log on through Remote Desktop Services"**
+   - **Add User or Group...** klicken
+   - `EC2\RDP-Users` eingeben → **Check Names** → **OK**
+   - **Add User or Group...** klicken
+   - `EC2\RDP-Admins` eingeben → **Check Names** → **OK**
+   - **OK** klicken
+
+<img width="2994" height="1640" alt="allow rdp verbindung" src="https://github.com/user-attachments/assets/7b1d056a-8646-422f-93b0-9d755429286b" />
+
+
+---
+
+### 5. RDP-Verbindung testen
+
+**Vom Client zum DC verbinden:**
+
+1. **Remote Desktop Connection öffnen**
+   - Win+R → `mstsc` → Enter
+   - Computer: `10.0.1.10` (DC Private IP)
+   - **Connect** klicken
+
+<img width="3634" height="1984" alt="test von client auf dc kommen" src="https://github.com/user-attachments/assets/7dc52fbe-dc59-42dc-b5da-9a181b010132" />
+
+
+2. **Als testuser anmelden**
+   - Username: `EC2\testuser`
+   - Password: `Tbz12344`
+   - **OK** klicken
+
+
+
+3. **Erfolgreiche Verbindung**
+   - Desktop des Domain Controllers wird angezeigt
+   - RDP-Zugriff funktioniert für normale Benutzer
+
+<img width="3654" height="1976" alt="rdp funktioniert" src="https://github.com/user-attachments/assets/30131a5e-de44-4c2d-9fda-52d04ea0f998" />
+<img width="3638" height="1954" alt="rdp beweis" src="https://github.com/user-attachments/assets/f8c52ad9-137c-4000-91cc-e1d8ee261df0" />
+
+
+-
