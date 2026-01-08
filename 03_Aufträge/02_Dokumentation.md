@@ -1,4 +1,4 @@
-<img width="3644" height="1964" alt="User für Rdp verbindung erstellen" src="https://github.com/user-attachments/assets/cac09e4e-a8c0-4ec2-b3c1-3f808a49a833" /># Initial Setup – AWS Infrastruktur & Windows Basis-Konfiguration
+<img width="3110" height="1830" alt="promoter gruppe erstellen" src="https://github.com/user-attachments/assets/34fb383b-3f15-4d65-9989-90ffd6b978f1" /><img width="3644" height="1964" alt="User für Rdp verbindung erstellen" src="https://github.com/user-attachments/assets/cac09e4e-a8c0-4ec2-b3c1-3f808a49a833" /># Initial Setup – AWS Infrastruktur & Windows Basis-Konfiguration
 
 ## 1. AWS Infrastruktur erstellen
 
@@ -312,4 +312,109 @@ Nach dem Neustart:
 <img width="3638" height="1954" alt="rdp beweis" src="https://github.com/user-attachments/assets/f8c52ad9-137c-4000-91cc-e1d8ee261df0" />
 
 
--
+---
+
+## Aufgabe 4: Freigaben, Laufwerke & Berechtigungen
+
+### Phase 1: Benutzer und Gruppen anlegen
+
+#### 1. Abteilungsgruppen erstellt
+
+Im Active Directory wurden folgende Abteilungsgruppen erstellt:
+
+- **Sekretariat** (Global Security Group)
+- **Buchhaltung** (Global Security Group)
+- **GL** (Global Security Group)
+- **Promoter** (Global Security Group)
+
+**Vorgehensweise:**
+1. Active Directory Users and Computers öffnen
+2. Rechtsklick auf Container "Users" → New → Group
+3. Gruppenname eingeben, Group scope: Global, Group type: Security
+   
+<img width="1976" height="1344" alt="Sekretariat gruppe erstellen" src="https://github.com/user-attachments/assets/76d6157d-8c5e-45a4-a8ec-0612e2ce59d9" />
+
+<img width="2958" height="1836" alt="Buchhaltung gruppe erstellen" src="https://github.com/user-attachments/assets/d551fa7b-5c62-4193-a303-7680464a2089" />
+
+<img width="2336" height="1582" alt="GL gruppe erstellen" src="https://github.com/user-attachments/assets/ba39546f-25c2-47b9-905a-61a2161ab7db" />
+
+<img width="3110" height="1830" alt="promoter gruppe erstellen" src="https://github.com/user-attachments/assets/aef5bd18-8551-4e4e-8eda-b671da7e8667" />
+
+---
+
+#### 2. Globale Gruppen "intern" und "extern" erstellt
+
+Zwei übergeordnete Gruppen zur Strukturierung:
+
+- **intern** (Global Security Group) - für interne Abteilungen
+- **extern** (Global Security Group) - für externe Abteilungen
+
+<img width="2428" height="1592" alt="intern gruppe erstellen" src="https://github.com/user-attachments/assets/8934b9a6-617c-4940-bbb5-21d13ed92dd0" />
+
+<img width="2318" height="1336" alt="extern gruppe erstellen" src="https://github.com/user-attachments/assets/85071cef-cf94-40a6-bcfb-8a8c6175dd94" />
+
+---
+
+#### 3. Benutzer angelegt
+
+Pro Abteilung wurde ein Testbenutzer erstellt:
+
+| Abteilung | Benutzername | Vorname | Nachname | Passwort |
+|-----------|--------------|---------|----------|----------|
+| Sekretariat | s.mueller | Sandra | Mueller | Tbz12344$ |
+| Buchhaltung | m.schmidt | Marco | Schmidt | Tbz12344$ |
+| GL | a.weber | Anna | Weber | Tbz12344$ |
+| Promoter | t.klein | Thomas | Klein | Tbz12344$ |
+
+<img width="2794" height="1832" alt="User erstellen" src="https://github.com/user-attachments/assets/5e0a5d86-649d-46d4-88aa-b731c82bc7fe" />
+
+<img width="2108" height="1352" alt="User erstellen 2" src="https://github.com/user-attachments/assets/934b18a2-5da3-42c4-ac33-723b7ef1b95d" />
+
+<img width="2536" height="1634" alt="User erstellen 3" src="https://github.com/user-attachments/assets/f757c098-0261-445e-ac63-caddee2d285b" />
+
+<img width="2590" height="1742" alt="User erstellen 4" src="https://github.com/user-attachments/assets/6f258e1c-ac49-4592-89e1-1e7824aa8539" />
+
+---
+
+#### 4. Benutzer zu Abteilungsgruppen zugeordnet
+
+Jeder Benutzer wurde seiner entsprechenden Abteilungsgruppe hinzugefügt:
+
+- s.mueller → Sekretariat
+- m.schmidt → Buchhaltung
+- a.weber → GL
+- t.klein → Promoter
+
+**Vorgehensweise:**
+1. Doppelklick auf Abteilungsgruppe
+2. Tab "Members" → Add
+3. Benutzername eingeben → Check Names → OK
+
+
+<img width="2042" height="1170" alt="user zu gruppe hinzufügen" src="https://github.com/user-attachments/assets/78cbb5c7-683a-429d-b59f-52f5454b1431" />
+
+<img width="2070" height="1628" alt="user zu gruppe hinzufügen 2" src="https://github.com/user-attachments/assets/289942ab-8041-438d-95d9-77a3a13f3165" />
+
+<img width="2362" height="1502" alt="user zu gruppe hinzufügen 3" src="https://github.com/user-attachments/assets/598f28b9-4bce-4178-99b3-79cec78b0060" />
+
+<img width="1852" height="1076" alt="user zu gruppe hinzufügen 4" src="https://github.com/user-attachments/assets/2a038316-00c1-4dce-9423-f32d968bb17a" />
+
+---
+
+#### 5. Abteilungsgruppen zu intern/extern zugeordnet
+
+**Gruppe "intern" enthält:**
+- Sekretariat
+- Buchhaltung
+- GL
+
+<img width="2000" height="1486" alt="gruppe zu gruppe intern hinzufügen" src="https://github.com/user-attachments/assets/c903f524-3ce9-43d4-b612-e8a10dca56d8" />
+
+**Gruppe "extern" enthält:**
+- Promoter
+
+
+<img width="2248" height="1442" alt="gruppe zu gruppe extern hinzufügen" src="https://github.com/user-attachments/assets/82f11dd4-171f-4707-a022-7fdacedf94ef" />
+
+
+---
