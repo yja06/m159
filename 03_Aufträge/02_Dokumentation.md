@@ -557,3 +557,98 @@ Die Standardgruppe "Domain Users" wurde von allen Ordnern entfernt, um eine saub
 | Aussendienst | extern | Read | Everyone: Change |
 
 ---
+
+**Phase 3** 
+
+***
+
+```markdown
+### Phase 3: ABE aktivieren & Berechtigungen testen
+
+#### 1. Access-Based Enumeration (ABE) aktiviert
+
+
+**Aktivierung über PowerShell:**
+
+Auf dem Domain Controller wurde ABE für beide Freigaben aktiviert:
+
+```powershell
+Set-SmbShare -Name "Daten" -FolderEnumerationMode AccessBased
+Set-SmbShare -Name "Aussendienst" -FolderEnumerationMode AccessBased
+```
+
+**Überprüfung:**
+```powershell
+Get-SmbShare | Select-Object Name, FolderEnumerationMode
+```
+<img width="1598" height="1144" alt="iSCIS downloaded" src="https://github.com/user-attachments/assets/b8e38827-f254-4a66-8ec3-06abf3722c0e" />
+
+<img width="3576" height="1936" alt="ABE für Freigabe " src="https://github.com/user-attachments/assets/0cca1ee5-645d-4799-8ff0-c0ef28d8ae44" />
+
+<img width="2880" height="1840" alt="ABE für Aussendienst Ordner" src="https://github.com/user-attachments/assets/5cbd9c96-3f5c-4be4-8c75-0b5bfeff35af" />
+
+<img width="1863" height="1064" alt="ABE funktioniert" src="https://github.com/user-attachments/assets/60243428-c1bc-49bf-85cf-455627bee7f6" />
+
+
+**Ergebnis:**
+- Freigabe "Daten": AccessBased ✅
+- Freigabe "Aussendienst": AccessBased ✅
+
+---
+
+#### 2. Berechtigungen getestet
+
+**Test 1: Benutzer s.mueller (Sekretariat)**
+- Login: `EC2\s.mueller`
+- Zugriff auf: `\\dc\Daten`
+- **Sichtbar:** Nur Ordner "Sekretariat" und "Pool" (ABE funktioniert)
+- **Nicht sichtbar:** Buchhaltung, GL (kein Zugriff)
+- **Schreibrechte in Sekretariat:** Erfolgreich getestet ✅
+
+<img width="901" height="926" alt="Anmeldung auf Cleint für Test ABE" src="https://github.com/user-attachments/assets/09792128-8512-45ed-a88e-79df01671139" />
+
+<img width="3592" height="1940" alt="File sharing sekretariat funktioniert" src="https://github.com/user-attachments/assets/c1629f02-e68e-4b35-b205-c14b7f36e3c5" />
+
+<img width="3584" height="1902" alt="Sekretariat write file sharing funktioniert" src="https://github.com/user-attachments/assets/92d80502-f708-4165-8b30-ee04f1126112" />
+
+
+---
+
+**Test 2: Benutzer m.schmidt (Buchhaltung)**
+- Login: `EC2\m.schmidt`
+- Zugriff auf: `\\dc\Daten`
+- **Sichtbar:** Nur "Buchhaltung" und "Pool"
+- **Schreibrechte in Buchhaltung:** Erfolgreich ✅
+
+<img width="3620" height="1950" alt="Buchhaltung User" src="https://github.com/user-attachments/assets/2e0d654f-dc1f-4af6-949f-b4974757957d" />
+<img width="3616" height="1958" alt="Buchaltung Freigabe" src="https://github.com/user-attachments/assets/a678e83c-0fad-48b2-becd-322f706b034a" />
+<img width="3594" height="1958" alt="Buchaltung Freigabe test" src="https://github.com/user-attachments/assets/aee20b55-56d3-4621-b8dc-e5f181cea9ea" />
+
+
+---
+
+**Test 3: Benutzer t.klein (Promoter - extern)**
+- Login: `EC2\t.klein`
+- Zugriff auf: `\\dc\Aussendienst`
+- **Berechtigung:** Nur Lesezugriff (Read)
+- **Schreibversuch:** Fehlgeschlagen (Access Denied) ✅
+
+<img width="3590" height="1932" alt="Login mit Aussendienst user" src="https://github.com/user-attachments/assets/658b8551-9b80-4965-814f-3ab47ba766f8" />
+
+<img width="2714" height="1502" alt="Aussendienst shared folder" src="https://github.com/user-attachments/assets/39b18284-23df-421e-bd9e-2c0430957c55" />
+<img width="3558" height="1826" alt="Aussendienst shared folder read rechte" src="https://github.com/user-attachments/assets/01e5a41e-e794-4ee3-bc6d-55c64dadacc6" />
+<img width="3550" height="1804" alt="Aussendienst shared folder read rechte test dc" src="https://github.com/user-attachments/assets/099ece67-b35f-4d42-9567-1a687facf3e8" />
+<img width="3642" height="1932" alt="Aussendienst shared folder read rechte funktioniert" src="https://github.com/user-attachments/assets/4fcbd954-4902-4b24-a8bd-860b64b7f236" />
+
+
+---
+
+### Zusammenfassung der Tests
+
+| Benutzer | Abteilung | Sichtbare Ordner | Schreibrechte | Ergebnis |
+|----------|-----------|------------------|---------------|----------|
+| s.mueller | Sekretariat | Sekretariat, Pool | Modify in Sekretariat | ✅ |
+| m.schmidt | Buchhaltung | Buchhaltung, Pool | Modify in Buchhaltung | ✅ |
+| t.klein | Promoter (extern) | Aussendienst | Nur Read | ✅ |
+
+---
