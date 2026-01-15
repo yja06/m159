@@ -653,5 +653,32 @@ Get-SmbShare | Select-Object Name, FolderEnumerationMode
 
 ---
 ## 7. DIT & GPO's
-<img width="2370" height="1524" alt="image" src="https://github.com/user-attachments/assets/c59b28f5-bbe8-4344-ab04-8b728a788fac" />
+<img width="2366" height="1492" alt="image" src="https://github.com/user-attachments/assets/7d9157b5-b7aa-4eae-a007-6bc98db22631" />
+
+## Aufgabe 7 - Teil 2: Netzlaufwerke via GPO
+
+
+
+### GPOs erstellt
+
+1. **GPO-Buchhaltung-Drive** → Verknüpft mit OU=Buchhaltung
+   - B: auf \\DC\Buchhaltung
+
+2. **GPO-Sekretariat-Drive** → Verknüpft mit OU=Sekretariat
+   - S: auf \\DC\Sekretariat
+
+3. **GPO-GL-Drive** → Verknüpft mit OU=GL
+   - G: auf \\DC\GL
+
+4. **GPO-Pool** → Verknüpft mit OU=yja06_Mitarbeitende
+   - P: auf \\DC\Pool (für alle Mitarbeiter)
+
+### Konfiguration
+
+- Computer Configuration → Preferences → Windows Settings → Drive Maps
+- Action: Create
+- Location: \\DC\[Sharename]
+- Reconnect: Aktiviert
+- Drive Letter: [B:, S:, G:, P:]
+
 
