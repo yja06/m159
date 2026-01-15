@@ -652,3 +652,6 @@ Get-SmbShare | Select-Object Name, FolderEnumerationMode
 | t.klein | Promoter (extern) | Aussendienst | Nur Read | ✅ |
 
 ---
+## 7. DIT & GPO's
+<img width="2370" height="1524" alt="image" src="https://github.com/user-attachments/assets/c59b28f5-bbe8-4344-ab04-8b728a788fac" />
+
