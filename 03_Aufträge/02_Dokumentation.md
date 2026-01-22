@@ -865,3 +865,39 @@ Software-Installation erfolgt beim Computer-Start (nicht bei `gpupdate /force`).
 
 ---
 
+## Aufgabe 8 – Entra Connect
+
+Ziel: Lokales AD mit Microsoft Entra ID (Azure AD) synchronisieren. 
+
+### Installation & Grundkonfiguration
+
+- Azure AD Connect auf dem DC gestartet und Setup ausgeführt.  
+- Mit Global Admin am Tenant angemeldet und Domänen‑Admin fürs lokale AD verwendet. 
+- Relevante Benutzer‑OUs für die Synchronisation ausgewählt. 
+- Wizard bis **„Configuration complete“** durchlaufen. 
+<img width="3592" height="1968" alt="Download Entra snyc" src="https://github.com/user-attachments/assets/8ccfea32-b731-45c7-be96-96cf9b4827b8" />
+<img width="2784" height="1482" alt="entra domain" src="https://github.com/user-attachments/assets/a7884da6-e9f5-4d37-b992-a0510c2a85e4" />
+<img width="2352" height="1663" alt="Screenshot 2026-01-22 104518" src="https://github.com/user-attachments/assets/1022a7c8-9e6e-4a87-89de-b949f90984a0" />
+<img width="2716" height="1823" alt="Screenshot 2026-01-22 104602" src="https://github.com/user-attachments/assets/aabf8a20-49a7-4006-9335-96bb490f3540" />
+<img width="2176" height="1751" alt="Screenshot 2026-01-22 104645" src="https://github.com/user-attachments/assets/aeb3a9f5-0e5a-485b-8f63-7ea386e5018d" />
+<img width="2471" height="1753" alt="Screenshot 2026-01-22 104657" src="https://github.com/user-attachments/assets/d479aaca-3612-401c-8d53-7e2f28a81b5e" />
+<img width="2659" height="2067" alt="Screenshot 2026-01-22 104714" src="https://github.com/user-attachments/assets/88423fbe-07f7-4e84-8a71-8139082cdd51" />
+<img width="1904" height="1404" alt="Screenshot 2026-01-22 104743" src="https://github.com/user-attachments/assets/d3073308-93d4-48c3-9dce-9cbf5f11ec51" />
+
+### Aufgetretener Fehler
+
+- Beim ersten Versuch trat eine  
+  `System.Security.Cryptography.CryptographicException: Access is denied`  
+  beim Zugriff auf `GetRSAPrivateKey` auf. 
+- Ursache: Der Entra‑Connect‑Dienstaccount hatte keine ausreichenden Schreibrechte auf  
+  `C:\ProgramData\Microsoft\Crypto\RSA\MachineKeys`. 
+<img width="2910" height="2030" alt="Screenshot 2026-01-22 105117" src="https://github.com/user-attachments/assets/2b9b2419-8c71-408b-a3c6-043a3612df4d" />
+
+### Fix
+<img width="3587" height="1636" alt="Screenshot 2026-01-22 105904" src="https://github.com/user-attachments/assets/c536eb1d-24d7-4fd0-9085-e37405a065d9" />
+
+### Ergebnis
+
+- Synchronization Service Manager zeigt erfolgreiche Sync‑Runs ohne Fehler. 
+- Im Entra Portal werden die lokalen Benutzer mit Status **„Synced from Active Directory“** angezeigt. 
+<img width="3578" height="1978" alt="result" src="https://github.com/user-attachments/assets/3784f495-483b-497e-b992-e959acb91c4b" />
