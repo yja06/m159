@@ -925,6 +925,8 @@ Kurzer Satz, was du machst (z.B. Client per GPO für Hybrid Entra Join konfiguri
 <img width="3566" height="1918" alt="domain verified" src="https://github.com/user-attachments/assets/22093927-5a5c-4e97-9594-dd01ece87d3f" />
 <img width="3598" height="1684" alt="custom domain name" src="https://github.com/user-attachments/assets/b843301a-2c5e-4309-abd3-3a68bc3e50c2" />
 <img width="1840" height="610" alt="check aufgabe 8" src="https://github.com/user-attachments/assets/80b5e254-854f-4dcf-9cd4-e1254aefb842" />
+<img width="3746" height="2028" alt="image" src="https://github.com/user-attachments/assets/3fb3fd27-7a69-452c-add0-f79cc32ead15" />
+
 
 
 
