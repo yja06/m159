@@ -865,7 +865,3 @@ Software-Installation erfolgt beim Computer-Start (nicht bei `gpupdate /force`).
 
 ---
 
-## Überprüfung
-
-### GPO-Anwendung erzwingen
-
