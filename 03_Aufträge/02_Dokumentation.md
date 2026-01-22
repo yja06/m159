@@ -821,9 +821,17 @@ Für jede Abteilung wurde eine Drucker-GPO erstellt:
 | GPO-Printer-Sekretariat | `\\1.ec2.yenul.m159\Drucker-Sekretariat` | OU=Sekretariat |
 | GPO-Printer-Promoter | `\\1.ec2.yenul.m159\Drucker-Promoter` | OU=Promoter |
 
-**Screenshot:** Printer-GPO Konfiguration
+<img width="2284" height="1680" alt="drucker " src="https://github.com/user-attachments/assets/849f74e4-0c15-4f4f-85dc-1ffc6b3ec979" />
 
-**Screenshot:** Client mit installiertem Drucker
+<img width="2128" height="1702" alt="drucker gl" src="https://github.com/user-attachments/assets/4121957d-1b7a-46a0-b0ee-7fd525ee25c0" />
+
+<img width="1770" height="1332" alt="Drucker sekretariat" src="https://github.com/user-attachments/assets/cfb3c40c-30c1-4767-b6c6-0eafb7718ec5" />
+
+<img width="3032" height="1826" alt="Drucker Promoter" src="https://github.com/user-attachments/assets/fcb35079-dbbf-44c3-9227-74ccdb19bf0b" />
+
+<img width="1630" height="1210" alt="printer gpos" src="https://github.com/user-attachments/assets/ac5800fb-9f10-4ffd-bd29-e92d94d4857f" />
+
+<img width="3610" height="1918" alt="Drucker test " src="https://github.com/user-attachments/assets/edfec7ee-1a1d-4129-ac2b-9461c345eb0c" />
 
 ---
 
