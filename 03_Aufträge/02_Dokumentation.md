@@ -652,33 +652,212 @@ Get-SmbShare | Select-Object Name, FolderEnumerationMode
 | t.klein | Promoter (extern) | Aussendienst | Nur Read | ✅ |
 
 ---
-## 7. DIT & GPO's
+# Aufgabe 7: DIT & GPOs
+
+## Übersicht
+Implementierung von Group Policy Objects (GPOs) zur zentralen Verwaltung der Active Directory-Umgebung mit Passwort-Richtlinien, Netzlaufwerken, Desktop-Shortcuts, Druckern und Software-Verteilung.
+
+
+---
+
+## Teil 0: DIT-Diagramm
+
+Das Directory Information Tree (DIT) wurde in draw.io erstellt und visualisiert die komplette AD-Struktur mit allen OUs, Benutzern und GPO-Verknüpfungen.
+
 <img width="2366" height="1492" alt="image" src="https://github.com/user-attachments/assets/7d9157b5-b7aa-4eae-a007-6bc98db22631" />
 
-## Aufgabe 7 - Teil 2: Netzlaufwerke via GPO
+---
+
+## Teil 1: Passwort-Policy
+
+**Ziel:** Sichere Passwort-Richtlinie für die gesamte Domain implementieren.
+
+### Durchführung
+
+1. Group Policy Management öffnen: `gpmc.msc`
+2. Rechtsklick auf "Default Domain Policy" → Edit
+3. Navigation: Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Password Policy
+
+### Konfigurierte Einstellungen
+
+- **Enforce password history:** 24 passwords
+- **Maximum password age:** 90 days
+- **Minimum password age:** 1 day
+- **Minimum password length:** 12 characters
+- **Password must meet complexity requirements:** Enabled
+- **Store passwords using reversible encryption:** Disabled
+
+<img width="2798" height="1348" alt="Deafault domain policy bearbeiten" src="https://github.com/user-attachments/assets/a2ab222c-3eff-44da-9dab-f26651e7aa1e" />
+
+<img width="1594" height="1180" alt="Passwort Policy open" src="https://github.com/user-attachments/assets/d289d137-f162-47e7-b7fd-97348e363de3" />
+
+<img width="1096" height="916" alt="Passwort Policy settings" src="https://github.com/user-attachments/assets/570335db-bc14-40ab-ba18-bf12ae5839eb" />
+
+---
+
+## Teil 2: Netzlaufwerke per GPO verteilen
+
+**Ziel:** Automatische Zuweisung von Netzlaufwerken basierend auf Abteilungszugehörigkeit.
+
+### Shares erstellen
+
+1. Ordner erstellt unter `C:\Daten\`:
+   - Pool, Buchhaltung, GL, Sekretariat, Promoter
+2. Computer Management → Shared Folders → Shares → New Share
+3. Jeden Ordner als Share mit gleichem Namen freigegeben
+4. Berechtigungen: Everyone - Full Control
+
+<img width="1932" height="1328" alt="shares ordner erstellt" src="https://github.com/user-attachments/assets/b05f400e-c1c9-46ba-9b2c-f8e7fbbfc21d" />
 
 
+### GPO für Pool-Laufwerk (alle Mitarbeiter)
 
-### GPOs erstellt
+1. `gpmc.msc` → Group Policy Objects → New
+2. Name: `GPO-Drive-Pool-All`
+3. Rechtsklick → Edit
+4. User Configuration → Preferences → Windows Settings → Drive Maps → New → Mapped Drive
+5. Konfiguration:
+   - Action: Create
+   - Location: `\\1.ec2.yenul.m159\Pool`
+   - Label as: Pool
+   - Drive Letter: P:
+   - Reconnect: ✓
+6. GPO mit Domain verknüpft
 
-1. **GPO-Buchhaltung-Drive** → Verknüpft mit OU=Buchhaltung
-   - B: auf \\DC\Buchhaltung
+### Abteilungs-Laufwerke
 
-2. **GPO-Sekretariat-Drive** → Verknüpft mit OU=Sekretariat
-   - S: auf \\DC\Sekretariat
+Für jede Abteilung wurde eine eigene GPO erstellt und mit der entsprechenden OU verknüpft:
 
-3. **GPO-GL-Drive** → Verknüpft mit OU=GL
-   - G: auf \\DC\GL
+| GPO Name | Share Path | Laufwerk | Verknüpft mit |
+|----------|-----------|----------|---------------|
+| GPO-Drive-Buchhaltung | `\\1.ec2.yenul.m159\Buchhaltung` | B: | OU=Buchhaltung |
+| GPO-Drive-GL | `\\1.ec2.yenul.m159\GL` | G: | OU=GL |
+| GPO-Drive-Sekretariat | `\\1.ec2.yenul.m159\Sekretariat` | S: | OU=Sekretariat |
+| GPO-Drive-Promoter | `\\1.ec2.yenul.m159\Promoter` | R: | OU=Promoter |
 
-4. **GPO-Pool** → Verknüpft mit OU=yja06_Mitarbeitende
-   - P: auf \\DC\Pool (für alle Mitarbeiter)
+<img width="1486" height="1054" alt="neue gpo" src="https://github.com/user-attachments/assets/c2bead9e-6981-4124-9dd4-8ce9d5ebac6c" />
 
-### Konfiguration
+<img width="1568" height="1182" alt="Pool Laufwerk erstellt" src="https://github.com/user-attachments/assets/f7cb332e-e55c-4dc6-bbd5-e58ce1fe4eba" />
 
-- Computer Configuration → Preferences → Windows Settings → Drive Maps
-- Action: Create
-- Location: \\DC\[Sharename]
-- Reconnect: Aktiviert
-- Drive Letter: [B:, S:, G:, P:]
+<img width="1544" height="1106" alt="GPO zu Domain verlinken" src="https://github.com/user-attachments/assets/3197ddc6-b1d9-4422-9c7e-a70937479f1d" />
 
+<img width="532" height="986" alt="GPOs und mapped Drives erstellt" src="https://github.com/user-attachments/assets/67a41a50-ae21-4a2f-8da5-4621610b149e" />
+
+<img width="3000" height="1260" alt="shortcut erstelltn" src="https://github.com/user-attachments/assets/313d999c-59e2-481c-9cad-28c4755caf2c" />
+
+<img width="2472" height="1944" alt="gpo intern zu gruppe verteilen" src="https://github.com/user-attachments/assets/30ce936a-7f82-4459-88b4-c873fd98d67e" />
+
+---
+
+## Teil 3: Desktop-Shortcut zu Web-CRM
+
+**Ziel:** Automatische Desktop-Verknüpfung zur Web-CRM-Anwendung für interne Mitarbeiter.
+
+### Durchführung
+
+1. GPO erstellen: `GPO-Desktop-Shortcut-Intern`
+2. Edit → User Configuration → Preferences → Windows Settings → Shortcuts → New → Shortcut
+3. Konfiguration:
+   - Action: Create
+   - Name: Web-CRM
+   - Target type: URL
+   - Location: Desktop
+   - Target URL: `https://crm.webapp.ch`
+4. Security Filtering: Buchhaltung, GL, Sekretariat
+5. GPO mit OU "Intern" verknüpft
+
+<img width="3614" height="1970" alt="web crm auf desktop test" src="https://github.com/user-attachments/assets/48509ef7-3711-4e16-8a61-60626ac3b89b" />
+
+
+---
+
+## Teil 4: WMI-Filter
+
+WMI-Filter ermöglichen GPO-Anwendung basierend auf System-Eigenschaften.
+
+**Beispiel - Filter für Windows 10/11:**
+1. `gpmc.msc` → WMI Filters → New
+2. Name: `Filter-Windows10-11`
+3. Query: `SELECT * FROM Win32_OperatingSystem WHERE Version LIKE "10.%" OR Version LIKE "11.%"`
+4. Filter der gewünschten GPO zuweisen
+
+<img width="3076" height="1658" alt="WMI Filter erstellt" src="https://github.com/user-attachments/assets/bf3533df-1ef2-428b-b502-978fb2bf6306" />
+
+---
+
+## Teil 5: Drucker per GPO verteilen
+
+**Ziel:** Abteilungsspezifische Drucker automatisch bereitstellen.
+
+### Drucker erstellen
+
+1. Settings → Devices → Printers & scanners → Add printer
+2. "Add a local printer or network printer with manual settings"
+3. Port: FILE: (Print to File)
+4. Driver: Generic / Text Only
+5. Drucker erstellt und freigegeben:
+   - Drucker-Buchhaltung
+   - Drucker-GL
+   - Drucker-Sekretariat
+   - Drucker-Promoter
+
+### GPO für Drucker-Verteilung
+
+Für jede Abteilung wurde eine Drucker-GPO erstellt:
+
+1. GPO erstellen (z.B. `GPO-Printer-Buchhaltung`)
+2. Edit → User Configuration → Preferences → Control Panel Settings → Printers
+3. New → Shared Printer
+4. Konfiguration:
+   - Action: Create
+   - Share path: `\\1.ec2.yenul.m159\Drucker-[Abteilung]`
+   - Set as default printer: ✓
+5. GPO mit entsprechender OU verknüpft
+
+| GPO Name | Drucker-Share | Verknüpft mit |
+|----------|--------------|---------------|
+| GPO-Printer-Buchhaltung | `\\1.ec2.yenul.m159\Drucker-Buchhaltung` | OU=Buchhaltung |
+| GPO-Printer-GL | `\\1.ec2.yenul.m159\Drucker-GL` | OU=GL |
+| GPO-Printer-Sekretariat | `\\1.ec2.yenul.m159\Drucker-Sekretariat` | OU=Sekretariat |
+| GPO-Printer-Promoter | `\\1.ec2.yenul.m159\Drucker-Promoter` | OU=Promoter |
+
+**Screenshot:** Printer-GPO Konfiguration
+
+**Screenshot:** Client mit installiertem Drucker
+
+---
+
+## Teil 6: Software-Installation (Notepad++)
+
+**Ziel:** Automatische Installation von Notepad++ im Sekretariat.
+
+### Vorbereitung
+
+1. Notepad++ MSI-Installer heruntergeladen (x64 Version)
+2. Software-Share erstellt: `C:\SoftwarePackages`
+3. Als `\\1.ec2.yenul.m159\SoftwarePackages` freigegeben
+4. MSI-Datei im Share abgelegt
+
+### GPO erstellen
+
+1. GPO erstellen: `GPO-Software-Notepad`
+2. Edit → Computer Configuration → Policies → Software Settings → Software installation
+3. New → Package → MSI-Datei ausgewählt
+4. Deployment: Assigned
+5. GPO mit OU "Sekretariat" verknüpft
+
+### Anwendung
+
+Software-Installation erfolgt beim Computer-Start (nicht bei `gpupdate /force`). Client-Computer muss neu gestartet werden.
+
+<img width="2804" height="1582" alt="Software GPO" src="https://github.com/user-attachments/assets/918be6f3-9d44-49c8-8560-62208d664b4c" />
+
+<img width="3356" height="1350" alt="GPO Software verknüpft" src="https://github.com/user-attachments/assets/088eee25-6a88-4209-8087-f0e4bbc09c22" />
+<img width="3636" height="1972" alt="Software verteilt test" src="https://github.com/user-attachments/assets/b42c1643-5c23-4243-b352-e5ce55bf62ab" />
+
+---
+
+## Überprüfung
+
+### GPO-Anwendung erzwingen
 
