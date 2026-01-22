@@ -901,3 +901,36 @@ Ziel: Lokales AD mit Microsoft Entra ID (Azure AD) synchronisieren.
 - Synchronization Service Manager zeigt erfolgreiche Sync‑Runs ohne Fehler. 
 - Im Entra Portal werden die lokalen Benutzer mit Status **„Synced from Active Directory“** angezeigt. 
 <img width="3578" height="1978" alt="result" src="https://github.com/user-attachments/assets/3784f495-483b-497e-b992-e959acb91c4b" />
+
+# Aufgabe 8 – Hybrid Entra Join
+
+## Ziel
+Kurzer Satz, was du machst (z.B. Client per GPO für Hybrid Entra Join konfigurieren).
+
+## Schritte
+1. Group Policy Management auf dem Domain Controller öffnen.
+2. GPO **Hybrid-Entra-Join** bearbeiten.
+3. Einstellung **Register domain joined computers as devices** aktivieren.
+4. GPO mit der Domäne/OU verknüpfen.
+5. Auf dem Client `gpupdate /force` ausführen und neu starten.
+6. Mit `dsregcmd /status` prüfen, ob **AzureAdJoined : YES** ist.
+7. Im Entra-Portal unter **Devices** kontrollieren, ob der Client als Hybrid Azure AD joined erscheint.
+
+<img width="3578" height="1978" alt="result" src="https://github.com/user-attachments/assets/b8a72439-7e34-4577-b6f5-fddb4287aa91" />
+<img width="3592" height="1840" alt="registered devices" src="https://github.com/user-attachments/assets/1e4566c7-e7f1-4893-81a1-c67558e84204" />
+<img width="3570" height="1944" alt="gpo enabled" src="https://github.com/user-attachments/assets/f7faa209-a01b-4c02-a301-d399c4d2f71d" />
+<img width="2784" height="1482" alt="entra domain" src="https://github.com/user-attachments/assets/27e218a1-1736-4a7a-aecd-8034f0711e26" />
+<img width="3832" height="1934" alt="Dynrecord" src="https://github.com/user-attachments/assets/98f1b52f-e79b-4792-8b7f-d56b9cc4e9e6" />
+<img width="3592" height="1968" alt="Download Entra snyc" src="https://github.com/user-attachments/assets/d4b47d84-e62c-4d67-94fc-234b8bf8534d" />
+<img width="3566" height="1918" alt="domain verified" src="https://github.com/user-attachments/assets/22093927-5a5c-4e97-9594-dd01ece87d3f" />
+<img width="3598" height="1684" alt="custom domain name" src="https://github.com/user-attachments/assets/b843301a-2c5e-4309-abd3-3a68bc3e50c2" />
+<img width="1840" height="610" alt="check aufgabe 8" src="https://github.com/user-attachments/assets/80b5e254-854f-4dcf-9cd4-e1254aefb842" />
+
+
+
+
+
+
+
+
+
