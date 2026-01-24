@@ -928,11 +928,21 @@ Kurzer Satz, was du machst (z.B. Client per GPO für Hybrid Entra Join konfiguri
 <img width="3746" height="2028" alt="image" src="https://github.com/user-attachments/assets/3fb3fd27-7a69-452c-add0-f79cc32ead15" />
 
 
+# Aufgabe 9 – Servergespeicherte Benutzerprofile / Profilordner-Migration
 
+## Kriterium erfüllt: ✓
+Die Migration eines Profilordners von lokal zu einem zentralen Share war erfolgreich.
 
+## Durchführung
+1. **Share erstellt:** `\\dc\UserProfiles` mit Vollzugriff
+2. **Testdatei erstellt:** `migration_test.txt` lokal auf Desktop
+3. **Datei migriert:** Zu `\\dc\UserProfiles` kopiert
+4. **Erfolgreich verifiziert:** Datei liegt im zentralen Share
 
-
-
-
-
-
+## Benutzer: EC2\m.schmidt
+## Server: dc
+## Pfad: \\dc\UserProfiles
+<img width="2460" height="1804" alt="documents redirect" src="https://github.com/user-attachments/assets/020d39d5-7404-4344-bd6c-c448d541fd97" />
+<img width="3032" height="2034" alt="redirect path" src="https://github.com/user-attachments/assets/59458372-2299-4079-977c-dbbcf2ca7e07" />
+<img width="3150" height="1808" alt="path funktioniert" src="https://github.com/user-attachments/assets/b33dd5bb-3e90-4545-903e-1e1ab015ca9e" />
+<img width="3582" height="1960" alt="test" src="https://github.com/user-attachments/assets/9a971990-ca25-466c-809c-c3e495cf8526" />
