@@ -946,3 +946,4 @@ Die Migration eines Profilordners von lokal zu einem zentralen Share war erfolgr
 <img width="3032" height="2034" alt="redirect path" src="https://github.com/user-attachments/assets/59458372-2299-4079-977c-dbbcf2ca7e07" />
 <img width="3150" height="1808" alt="path funktioniert" src="https://github.com/user-attachments/assets/b33dd5bb-3e90-4545-903e-1e1ab015ca9e" />
 <img width="3582" height="1960" alt="test" src="https://github.com/user-attachments/assets/9a971990-ca25-466c-809c-c3e495cf8526" />
+<img width="1852" height="370" alt="image" src="https://github.com/user-attachments/assets/d8b6de17-9590-4ec1-be0d-513be9bd71d4" />
