@@ -947,3 +947,27 @@ Die Migration eines Profilordners von lokal zu einem zentralen Share war erfolgr
 <img width="3150" height="1808" alt="path funktioniert" src="https://github.com/user-attachments/assets/b33dd5bb-3e90-4545-903e-1e1ab015ca9e" />
 <img width="3582" height="1960" alt="test" src="https://github.com/user-attachments/assets/9a971990-ca25-466c-809c-c3e495cf8526" />
 <img width="1852" height="370" alt="image" src="https://github.com/user-attachments/assets/d8b6de17-9590-4ec1-be0d-513be9bd71d4" />
+
+# Aufgabe 10 – Netzlaufwerk zu Azure Migration
+
+## Durchführung
+1. Storage Account `m159storage2026` in Azure erstellt
+2. File Share `auftraege` erstellt
+3. Netzlaufwerk Z: über Storage Account Key verbunden
+4. Verbindung erfolgreich getestet
+
+## Befehl
+```powershell
+net use Z: "\\m159storage2026.file.core.windows.net\auftraege" /u:Azure\m159storage2026 "[Key]"
+Get-PSDrive Z
+```
+<img width="3344" height="1828" alt="speicher azure ressource" src="https://github.com/user-attachments/assets/16afa1c0-c3b3-4a89-91b5-19b53ee5a912" />
+<img width="3488" height="1360" alt="result" src="https://github.com/user-attachments/assets/f2769c49-09b9-4b38-8d81-c14a87fe542c" />
+<img width="3824" height="1994" alt="share" src="https://github.com/user-attachments/assets/cf235d2f-8210-4feb-9cdc-fbad83cdd871" />
+<img width="2836" height="1684" alt="test" src="https://github.com/user-attachments/assets/40a92628-a421-441f-b052-234ca48b687f" />
+
+<img width="2166" height="1370" alt="explorer" src="https://github.com/user-attachments/assets/f2a42132-2e7f-4684-baa9-8f74eb385827" />
+<img width="3832" height="1834" alt="rollenzuweisung" src="https://github.com/user-attachments/assets/0441d40c-abd0-45f7-afb9-fbe2570f3d43" />
+<img width="3396" height="1756" alt="sekretariat rolle" src="https://github.com/user-attachments/assets/fbe35e25-d72c-466c-8ced-162dbfa227a5" />
+
+
