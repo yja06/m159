@@ -29,7 +29,7 @@ Diese Umgebung umfasst:
 | Active Directory Second-Level-Domäne | yenul.m159 |
 | Geplante öffentliche Domain (UPN) | yenul159.v6.rocks |
 | Azure Education Account | jayawardhanayenul@gmail.com |
-| Azure Education Account Passwort | [privat im Passwort-Manager speichern] |
+| Azure Education Account Passwort | [privat] |
 
 ## 4. AWS VPC Setup (KORRIGIERT)
 
