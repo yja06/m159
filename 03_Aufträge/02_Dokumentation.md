@@ -973,4 +973,9 @@ Get-PSDrive Z
 <img width="3832" height="1834" alt="rollenzuweisung" src="https://github.com/user-attachments/assets/0441d40c-abd0-45f7-afb9-fbe2570f3d43" />
 <img width="3396" height="1756" alt="sekretariat rolle" src="https://github.com/user-attachments/assets/fbe35e25-d72c-466c-8ced-162dbfa227a5" />
 
+# Aufgabe 11
 
+<img width="3840" height="1850" alt="App Reg" src="https://github.com/user-attachments/assets/f9722a08-7747-4bc0-9964-0203f5f50a6f" />
+<img width="3806" height="1954" alt="Secret key" src="https://github.com/user-attachments/assets/a4becf56-8724-4d8d-8886-c30fe081d763" />
+<img width="3816" height="1958" alt="test" src="https://github.com/user-attachments/assets/5444c07b-adf6-4d53-93d4-c75f75dd3427" />
+<img width="2660" height="1314" alt="cmd test" src="https://github.com/user-attachments/assets/c05f9464-2fd7-4695-ab3b-f04bab14d751" />
