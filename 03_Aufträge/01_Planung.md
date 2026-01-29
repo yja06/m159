@@ -129,9 +129,9 @@ Diese Umgebung umfasst:
 
 | Komponente | FQDN | Private IP | Subnet | Availability Zone | Elastic IP | DNS 1 | DNS 2 | Lokaler Admin | Kennwort |
 |-----------|------|-----------|--------|-------------------|------------|-------|-------|---------------|----------|
-| On-Prem AD DC | dc1.ec2.yenul.m159 | 10.0.1.10 | Public 1a (10.0.1.0/24) | us-east-1a | [wird zugewiesen] | 10.0.1.10 | 10.0.100.10 | Administrator | Tbz12344$ |
-| Windows Server (Client) | client1.ec2.yenul.m159 | 10.0.2.20 | Public 1b (10.0.2.0/24) | us-east-1b | [wird zugewiesen] | 10.0.1.10 | 10.0.100.10 | Administrator | Tbz12344$ |
-| Windows Server Admin Center | admincenter.ec2.yenul.m159 | 10.0.2.30 | Public 1b (10.0.2.0/24) | us-east-1b | [wird zugewiesen] | 10.0.1.10 | 10.0.100.10 | Administrator | Tbz12344$ |
+| On-Prem AD DC | dc1.ec2.yenul.m159 | 10.0.1.10 | Public 1a (10.0.1.0/24) | us-east-1a | 52.6.248.6 | 10.0.1.10 | 10.0.100.10 | Administrator | Tbz12344$ |
+| Windows Server (Client) | client1.ec2.yenul.m159 | 10.0.2.20 | Public 1b (10.0.2.0/24) | us-east-1b | 100.25.38.57 | 10.0.1.10 | 10.0.100.10 | Administrator | Tbz12344$ |
+| Windows Server Admin Center | admincenter.ec2.yenul.m159 | 10.0.2.30 | Public 1b (10.0.2.0/24) | us-east-1b |  | 10.0.1.10 | 10.0.100.10 | Administrator | Tbz12344$ |
 
 ## 8. Abteilungen & Benutzer
 
