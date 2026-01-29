@@ -315,6 +315,9 @@ Nach dem Neustart:
 ---
 
 ## Aufgabe 4: Freigaben, Laufwerke & Berechtigungen
+### Diagramm
+
+<img width="1691" height="1456" alt="image" src="https://github.com/user-attachments/assets/baefce19-afea-4283-8eef-6e217bb8ab34" />
 
 ### Phase 1: Benutzer und Gruppen anlegen
 
