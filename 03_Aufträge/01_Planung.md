@@ -129,9 +129,9 @@ Diese Umgebung umfasst:
 
 | Komponente | FQDN | Private IP | Subnet | Availability Zone | Elastic IP | DNS 1 | DNS 2 | Lokaler Admin | Kennwort |
 |-----------|------|-----------|--------|-------------------|------------|-------|-------|---------------|----------|
-| On-Prem AD DC | dc1.ec2.yenul.m159 | 10.0.1.10 | Public 1a (10.0.1.0/24) | us-east-1a | [wird zugewiesen] | 10.0.1.10 | 10.0.100.10 | Administrator | StrengesPasswort!DC-Local-2025 |
-| Windows Server (Client) | client1.ec2.yenul.m159 | 10.0.2.20 | Public 1b (10.0.2.0/24) | us-east-1b | [wird zugewiesen] | 10.0.1.10 | 10.0.100.10 | Administrator | StrengesPasswort!Client-2025 |
-| Windows Server Admin Center | admincenter.ec2.yenul.m159 | 10.0.2.30 | Public 1b (10.0.2.0/24) | us-east-1b | [wird zugewiesen] | 10.0.1.10 | 10.0.100.10 | Administrator | StrengesPasswort!WAC-2025 |
+| On-Prem AD DC | dc1.ec2.yenul.m159 | 10.0.1.10 | Public 1a (10.0.1.0/24) | us-east-1a | [wird zugewiesen] | 10.0.1.10 | 10.0.100.10 | Administrator | Tbz12344$ |
+| Windows Server (Client) | client1.ec2.yenul.m159 | 10.0.2.20 | Public 1b (10.0.2.0/24) | us-east-1b | [wird zugewiesen] | 10.0.1.10 | 10.0.100.10 | Administrator | Tbz12344$ |
+| Windows Server Admin Center | admincenter.ec2.yenul.m159 | 10.0.2.30 | Public 1b (10.0.2.0/24) | us-east-1b | [wird zugewiesen] | 10.0.1.10 | 10.0.100.10 | Administrator | Tbz12344$ |
 
 ## 8. Abteilungen & Benutzer
 
@@ -142,13 +142,6 @@ Diese Umgebung umfasst:
 | 3 | GL | gl-sandra | Sandra | Keller | GL!2025 | intern |
 | 4 | Promoter | promo-max | Max | Weber | Promoter!2025 | extern |
 
-## 9. Python App Registration (Entra ID)
-
-| Name | Wert |
-|------|------|
-| Directory (tenant) ID | [wird nach Erstellung eingetragen] |
-| Application (client) ID | [wird nach Erstellung eingetragen] |
-| Client Secret ID | [wird nach Erstellung eingetragen] |
 
 ## 10. Hinweise
 
